@@ -1,17 +1,38 @@
-import React, { useState } from "react";
+import BASE_URL from "@/api";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const CourseMentors = ({ course }) => {
 
-  if (!course?.mentors?.length) return null;
-  const [flippedIndex, setFlippedIndex] = useState(null)
+  const [data, setData] = useState([]);
+  const [flippedIndex, setFlippedIndex] = useState(null);
+
+  useEffect(() => {
+    const getMentors = async () => {
+      try {
+        const res = await axios.get(`http://localhost:3000/api/mentors/get`);
+        setData(res.data.data);
+      } catch (err) {
+        console.log("Error ", err);
+      }
+    }
+    getMentors()
+  }, [])
+
+  const courseMentor = data.filter(
+    (mentor) =>
+      mentor.type === "Mentor" &&
+      mentor.course?.name === course?.name
+  )
+
+  // console.log(courseMentor);
+
+  if (courseMentor.length === 0) return null;
 
   return (
     <section className="relative w-full overflow-hidden bg-black py-16 sm:py-16">
 
       <div className="pointer-events-none absolute left-1/2 top-10 h-87.5 w-125 -translate-x-1/2 rounded-full bg-[#ffac26]/4.5 blur-[120px]" />
-
-
-      {/* Header */}
 
       <div className="relative mx-auto mb-10 max-w-7xl px-5 text-center sm:mb-14">
 
@@ -28,20 +49,10 @@ const CourseMentors = ({ course }) => {
           professionals who bring real-world industry experience into
           the classroom.
         </p>
-
       </div>
 
-
-      {/* Mentor Cards */}
-
-      {/* <div 
-      className="relative mx-auto flex max-w-6xl flex-col items-center justify-center gap-6 px-5 sm:flex-row sm:items-stretch"
-      > */}
-      {/* “ */}
-      {/* <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3" > */}
-
       <div className="relative mx-auto grid max-w-6xl grid-cols-2 justify-items-center gap-3 px-4 sm:grid-cols-3 sm:gap-5 sm:px-5 lg:grid-cols-4 lg:gap-6">
-        {course.mentors.map((mentor, index) => {
+        {courseMentor.map((mentor, index) => {
           const isFlipped = flippedIndex === index
 
           return (
@@ -68,7 +79,7 @@ const CourseMentors = ({ course }) => {
                 {/* ===== Front ===== */}
                 <div className="absolute inset-0 overflow-hidden rounded-2xl border border-white/10 bg-[#111] [-webkit-backface-visibility:hidden] [backface-visibility:hidden]">
                   <img
-                    src={mentor.image}
+                    src={`http://localhost:3000/${mentor.image}`}
                     alt={mentor.name}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-700 [@media(hover:hover)]:group-hover:scale-105"
@@ -104,7 +115,7 @@ const CourseMentors = ({ course }) => {
                   </div>
 
                   <p className="mt-2 max-h-[55%] overflow-y-auto font-onest text-[11px] leading-[1.5] text-white/60 no-scrollbar sm:text-xs sm:leading-6">
-                    {mentor.details}
+                    {mentor.desc}
                   </p>
                 </div>
               </div>
