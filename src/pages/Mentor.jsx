@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {
-    Clapperboard,
-    Globe2,
-    ShieldCheck,
-    Quote,
-} from "lucide-react";
-
+import { Clapperboard, ShieldCheck } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -33,16 +27,6 @@ import img20 from "../assets/mentors/st.webp"
 import img21 from "../assets/mentors/sri.webp"
 import img22 from "../assets/mentors/arvinth.webp"
 import img23 from "../assets/mentors/js-di.webp"
-
-import inter1 from "../assets/mentors/international-guest/cs.webp"
-import inter2 from "../assets/mentors/international-guest/mh.webp"
-import inter3 from "../assets/mentors/international-guest/ks.webp"
-import inter4 from "../assets/mentors/international-guest/mb.webp"
-import inter5 from "../assets/mentors/international-guest/pp.webp"
-import inter6 from "../assets/mentors/international-guest/pt.webp"
-import inter7 from "../assets/mentors/international-guest/dj.webp"
-import inter8 from "../assets/mentors/international-guest/m.webp"
-import inter9 from "../assets/mentors/international-guest/ik.webp"
 
 import advisory1 from "../assets/mentors/advisory-board/seetha.jpg"
 import advisory2 from "../assets/mentors/advisory-board/rajen.jpg"
@@ -83,7 +67,6 @@ const steps = [
             { name: "Shiv Shankar", role: "Mentor | VFX & VP", img: img15, bio: "Virtual Production expert and co-author of a book on Virtual Production. Specialist in ICVFX and real- time workflows." },
             { name: "Muniraj", role: "Creative Technologist", img: img16, bio: "Leading DIT for over 100 films. Expert in VFX pipelines, data management and Virtual Production workflows." },
 
-
             { name: "Kaamesh", role: "Mentor | Editing", img: img17, bio: "Experienced editing mentor and freelance editor for feature films and digital content platforms." },
             { name: "JA. Deepa", role: "Mentor | Direction", img: img18, bio: "Popular writer and program producer for leading television channels. Established screenwriter and creative consultant." },
             { name: "Sai Vijendhrn", role: "Mentor | Direction", img: img19, bio: "Sai Vijendhrn is a popular writer, mentor and specialized in script Doctoring, his books on screenplay writing are best sellers." },
@@ -93,28 +76,8 @@ const steps = [
             { name: "John Sriram", role: "Mentor | DI Colorist", img: img23, bio: "John Sriram is a leading colorist, DI editor worked for Thangalan and many feature films, documentaries and shortfilms." },
         ],
     },
-    // {
-    //     number: "02",
-    //     key: "guestLecturers",
-    //     icon: Globe2,
-    //     title: "International Guest Lecturers",
-    //     description:
-    //         "Visiting faculty flying in from film schools and studios abroad to run focused masterclasses.",
-    //     mentors: [
-    //         { name: "Cam Sharpe", role: "", img: inter1, bio: "" },
-    //         { name: "Harina Hiromi", role: "", img: inter2, bio: "" },
-    //         { name: "Ken Simpson", role: "", img: inter3, bio: "" },
-    //         { name: "Miguel Basulto", role: "", img: inter4, bio: "" },
-    //         { name: "Prasanna Paul ", role: "", img: inter5, bio: "" },
-
-    //         { name: "Paul Tairov", role: "", img: inter6, bio: "" },
-    //         { name: "Dimitri Josephine", role: "", img: inter7, bio: "" },
-    //         { name: "Farnoosh Shajari", role: "", img: inter8, bio: "" },
-    //         { name: "Iman Khanchi", role: "", img: inter9, bio: "" },
-    //     ],
-    // },
     {
-        number: "03",
+        number: "02",
         key: "advisoryBoard",
         icon: ShieldCheck,
         title: "Advisory Board of Directors",
@@ -188,11 +151,7 @@ function MentorCard({ mentor, showOverlay }) {
             </div>
 
             {showOverlay &&
-                /* 
-                  1. Kept pointer-events-none by default so it doesn't break desktop hover.
-                  2. Added group-data-[tapped=true]: variants so the mobile click forces the layout changes.
-                  3. Enabled pointer-events-auto on desktop hover and mobile tapped states in case text contains links.
-                */
+               
                 <div className="pointer-events-none absolute inset-0 z-20 flex translate-y-6 flex-col justify-end bg-gradient-to-t from-black via-black/70 to-black/10 p-4 opacity-0 transition-all duration-500 ease-out 
                     md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-hover:pointer-events-auto
                     group-data-[tapped=true]:translate-y-0 group-data-[tapped=true]:opacity-100 group-data-[tapped=true]:pointer-events-auto
@@ -216,33 +175,16 @@ function MentorStep({ step, isLast, showOverlay }) {
         <div className=" relative flex gap-5 sm:gap-10 " >
             <div className={` min-w-0 flex-1 ${isLast ? "" : "pb-16 sm:pb-24"}`} >
                 <motion.div
-                    initial={{
-                        opacity: 0,
-                        y: 18,
-                    }}
-                    whileInView={{
-                        opacity: 1,
-                        y: 0,
-                    }}
-                    viewport={{
-                        once: true,
-                        margin: "-80px",
-                    }}
-                    transition={{
-                        duration: 0.5,
-                        ease: "easeOut",
-                    }}
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-80px"}}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
                     className="mb-6 sm:mb-8"
                 >
 
-                    {/* Mobile Number */}
                     <div className="mb-3 flex items-center gap-2 sm:hidden">
-                        <span
-                            className=" flex h-9 w-9 items-center  justify-center rounded-full  border-2 font-bebas text-sm "
-                            style={{
-                                borderColor: ACCENT,
-                                color: ACCENT,
-                            }}
+                        <span className=" flex h-9 w-9 items-center  justify-center rounded-full  border-2 font-bebas text-sm "
+                            style={{ borderColor: ACCENT, color: ACCENT }}
                         >
                             {step.number}
                         </span>
@@ -250,12 +192,7 @@ function MentorStep({ step, isLast, showOverlay }) {
 
                     {/* Title */}
                     <div className="mb-2 flex items-center gap-2.5">
-                        <Icon
-                            size={18}
-                            style={{
-                                color: ACCENT,
-                            }}
-                        />
+                        <Icon size={18}  style={{ color: ACCENT }} />
 
                         <h3 className=" font-bebas text-2xl tracking-wide text-white sm:text-3xl " >
                             {step.title}
@@ -267,8 +204,6 @@ function MentorStep({ step, isLast, showOverlay }) {
                         {step.description}
                     </p>
                 </motion.div>
-
-                {/* ================= MENTOR GRID ================= */}
 
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-5 lg:grid-cols-5">
                     {step.mentors.map((mentor) => (
@@ -298,28 +233,14 @@ export default function MentorsSection() {
 
                 <div className="relative z-10 mx-auto max-w-6xl">
                     <motion.div
-                        initial={{
-                            opacity: 0,
-                            y: 20,
-                        }}
-                        whileInView={{
-                            opacity: 1,
-                            y: 0,
-                        }}
-                        viewport={{
-                            once: true,
-                            margin: "-80px",
-                        }}
-                        transition={{
-                            duration: 0.6,
-                            ease: "easeOut",
-                        }}
+                        initial={{ opacity: 0, y: 20, }}
+                        whileInView={{ opacity: 1, y: 0, }}
+                        viewport={{ once: true, margin: "-80px" }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
                         className=" mx-auto mb-14 max-w-2xl text-center sm:mb-20" >
 
                         <p className="mb-3 font-onest text-xs font-semibold uppercase tracking-[0.2em]"
-                            style={{
-                                color: ACCENT,
-                            }}
+                            style={{ color: ACCENT, }}
                         >
                             Learn From The Best
                         </p>
